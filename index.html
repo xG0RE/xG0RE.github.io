@@ -1,7 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <div style="background:green;color:white;padding:8px;border-radius:4px;">hello world</div>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños ❤️</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Fondo */
+.fondo{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url("mivi26.jpg") center center/cover no-repeat;
+    filter:blur(8px) brightness(.45);
+    transform:scale(1.1);
+}
+
+/* Contenido */
+.contenido{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:5;
+}
+
+/* Texto */
+h1{
+    color:#ff2d55;
+    font-size:4rem;
+    text-shadow:
+        0 0 10px #ff2d55,
+        0 0 20px #ff2d55,
+        0 0 35px rgba(255,45,85,.6);
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid #ff2d55;
+    width:0;
+    animation:
+        escribir 5s steps(32,end) forwards,
+        cursor .8s infinite;
+}
+
+@keyframes escribir{
+    from{width:0;}
+    to{width:32ch;}
+}
+
+@keyframes cursor{
+    50%{
+        border-color:transparent;
+    }
+}
+
+/* Lluvia */
+.lluvia{
+    position:fixed;
+    top:-50px;
+    font-size:28px;
+    pointer-events:none;
+    animation:caer linear infinite;
+}
+
+@keyframes caer{
+    from{
+        transform:translateY(-60px) rotate(0deg);
+        opacity:1;
+    }
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0.8;
+    }
+}
+</style>
 </head>
+<body>
+
+<div class="fondo"></div>
+
+<div class="contenido">
+    <h1>¡Feliz cumpleaños! ❤️🎉</h1>
+</div>
+
+<script>
+const emojis = ["❤️","💖","💕","💗","💘","🎉","🥳","🎂"];
+
+function crearEmoji(){
+    const e = document.createElement("div");
+    e.className = "lluvia";
+    e.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+    e.style.left = Math.random()*100 + "vw";
+    e.style.animationDuration = (Math.random()*4 + 4) + "s";
+    e.style.fontSize = (20 + Math.random()*30) + "px";
+
+    document.body.appendChild(e);
+
+    setTimeout(()=>{
+        e.remove();
+    },9000);
+}
+
+setInterval(crearEmoji,200);
+</script>
+
+</body>
 </html>
